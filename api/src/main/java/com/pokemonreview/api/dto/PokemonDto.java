@@ -7,6 +7,6 @@ public class PokemonDto {
 	
 	private int id;
 	private String name;
-	private String tpye;
+	private String type;
 	
 }
