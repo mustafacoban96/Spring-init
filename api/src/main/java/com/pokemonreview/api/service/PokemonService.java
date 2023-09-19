@@ -16,7 +16,7 @@ public interface PokemonService {
 	PokemonDto createPoekmon(PokemonDto pokemonDto);
 	List<PokemonDto> getAllPokemon();
 	PokemonDto getPokemonDto(int id);
-	
+	PokemonDto updatePokemon(PokemonDto pokemonDto,int id);
 
 	
 }

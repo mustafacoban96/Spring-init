@@ -100,6 +100,9 @@ public class PokemonController {
 	}
 	
 	
+	
+	////////////////////////////////////////////////////////////////////////////////////////////
+	
 	@DeleteMapping("pokemon/{id}/delete")
 	public ResponseEntity<String> deletePokemon(@PathVariable("id") int pokemonId){
 		System.out.println(pokemonId);
