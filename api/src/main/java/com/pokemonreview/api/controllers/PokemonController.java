@@ -31,17 +31,29 @@ public class PokemonController {
 		this.pokemonService = pokemonService;
 	}
 
-
+	////////////////////////////////////////////////////////////////////////////
 	//ResponseEntity sınıfı HttpEntity sınıfına ek olarak builder tasarım desenini kullanarak isteğe yanıt olarak header bilgisi, HTTP durum kodu gibi bilgileri eklemeyi sağlar.
-	@GetMapping("pokemon") // => http://localhost:8080/api/pokemon
+	/*@GetMapping("pokemon") // => http://localhost:8080/api/pokemon
 	public ResponseEntity<List<Pokemon>> getPokemons(){
 		List<Pokemon> pokemons = new ArrayList<>();
 		pokemons.add(new Pokemon(1, "Squirtle", "Water"));
 		pokemons.add(new Pokemon(2,"Pikachu","Electric"));
 		pokemons.add(new Pokemon(3,"Chamander","Fire"));
 		return ResponseEntity.ok(pokemons);
+	}*/
+	
+	public ResponseEntity<List<PokemonDto>> getPokemons(){
+		return new ResponseEntity<>(pokemonService.getAllPokemon(), HttpStatus.OK);	
+	
 	}
 	
+	
+	
+	
+	
+	
+	
+	//////////////////////////////////////////////////////////////////////////////////////////////
 	
 	@GetMapping("pokemon/{id}")
 	public Pokemon pokemonDetail(@PathVariable int id) {

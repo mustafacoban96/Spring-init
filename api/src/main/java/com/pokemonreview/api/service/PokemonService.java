@@ -1,5 +1,7 @@
 package com.pokemonreview.api.service;
 
+import java.util.List;
+
 import com.pokemonreview.api.dto.PokemonDto;
 
 /* DTO entity datalarında fieldları katmanlar arası transfer edilmesine yarayan 
@@ -12,6 +14,7 @@ import com.pokemonreview.api.dto.PokemonDto;
 public interface PokemonService {
 
 	PokemonDto createPoekmon(PokemonDto pokemonDto);
+	List<PokemonDto> getAllPokemon();
 	
 
 	
