@@ -92,11 +92,18 @@ public class PokemonController {
 	
 	///////////////////////////////////////////////////////////////////////////////////////
 	
-	@PutMapping("pokemon/{id}/update")
+	//old version (before service and dto)
+	/*@PutMapping("pokemon/{id}/update")
 	public ResponseEntity<Pokemon> updatePokemon(@RequestBody Pokemon pokemon, @PathVariable("id") int pokemonId){
 		System.out.println(pokemon.getName());
 		System.out.println(pokemon.getType());
 		return ResponseEntity.ok(pokemon);
+	}*/
+	
+	@PutMapping("pokemon/{id}/update")
+	public ResponseEntity<PokemonDto> updatePokemon(@RequestBody PokemonDto pokemonDto, @PathVariable("id") int pokemonId){
+		PokemonDto response = pokemonService.updatePokemon(pokemonDto, pokemonId);
+		return new ResponseEntity<>(response,HttpStatus.OK);
 	}
 	
 	
