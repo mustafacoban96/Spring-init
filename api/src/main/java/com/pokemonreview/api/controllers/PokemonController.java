@@ -55,10 +55,20 @@ public class PokemonController {
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////
 	
-	@GetMapping("pokemon/{id}")
+	// old version detail
+	/*@GetMapping("pokemon/{id}")
 	public Pokemon pokemonDetail(@PathVariable int id) {
 		 return  new Pokemon(id,"Squirtle","Water");
+	}*/
+	
+	@GetMapping("pokemon/{id}")
+	public ResponseEntity<PokemonDto> pokemonDetail(@PathVariable int id) {
+		return  ResponseEntity.ok(pokemonService.getPokemonDto(id));
 	}
+	
+	
+	
+	
 	/////////////////////////////////////////////////////////////////
 	
 	/*@PostMapping("pokemon/create")

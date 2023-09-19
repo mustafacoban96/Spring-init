@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.pokemonreview.api.dto.PokemonDto;
+import com.pokemonreview.api.exceptions.PokemonNotFoundException;
 import com.pokemonreview.api.model.Pokemon;
 import com.pokemonreview.api.repository.PokemonRepository;
 import com.pokemonreview.api.service.PokemonService;
@@ -57,7 +58,6 @@ public class PokemonServiceImpl implements PokemonService{
 		return pokemonDto;
 		
 	}
-	
 	private Pokemon mapToEntity(PokemonDto pokemonDto) {
 		
 		Pokemon pokemon = new Pokemon();
@@ -66,6 +66,12 @@ public class PokemonServiceImpl implements PokemonService{
 		pokemon.setType(pokemonDto.getType());
 		
 		return pokemon;
+	}
+
+	@Override
+	public PokemonDto getPokemonDto(int id) {
+		Pokemon pokemon = pokemonRepository.findById(id).orElseThrow(() -> new PokemonNotFoundException("Pokemon could not be found!!!"));
+		return mapToDto(pokemon);
 	}
 
 }
