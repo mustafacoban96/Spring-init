@@ -10,6 +10,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import com.pokemonreview.api.dto.PokemonDto;
+import com.pokemonreview.api.dto.PokemonResponse;
 import com.pokemonreview.api.exceptions.PokemonNotFoundException;
 import com.pokemonreview.api.model.Pokemon;
 import com.pokemonreview.api.repository.PokemonRepository;
@@ -46,7 +47,7 @@ public class PokemonServiceImpl implements PokemonService{
 	
 
 	@Override
-	public List<PokemonDto> getAllPokemon(int pageNo, int pageSize) {
+	public PokemonResponse getAllPokemon(int pageNo, int pageSize) {
 		/*
 		 * Firstly, the findAll(Pageable pageable) method. 
 		 * This method accepts a Pageable object that represents pagination information. 
@@ -57,7 +58,17 @@ public class PokemonServiceImpl implements PokemonService{
 		// map because it returns a list
 		Page<Pokemon> pokemons = pokemonRepository.findAll(pageable);
 		List<Pokemon> listOfPokemons = pokemons.getContent();
-		return listOfPokemons.stream().map(pokemon -> mapToDto(pokemon)).collect(Collectors.toList()); 
+		List<PokemonDto> content = listOfPokemons.stream().map(pokemon -> mapToDto(pokemon)).collect(Collectors.toList()); 
+		
+		PokemonResponse pokemonResponse = new PokemonResponse();
+		pokemonResponse.setContent(content);
+		pokemonResponse.setPageNo(pokemons.getNumber());
+		pokemonResponse.setPageSize(pokemons.getSize());
+		pokemonResponse.setTotalElements(pokemons.getTotalElements());
+		pokemonResponse.setTotalPages(pokemonResponse.getTotalPages());
+		pokemonResponse.setLast(pokemons.isLast());
+		
+		return pokemonResponse;
 	}
 	
 	
@@ -95,8 +106,6 @@ public class PokemonServiceImpl implements PokemonService{
 		pokemon.setType(pokemonDto.getType());
 		
 		Pokemon updatedPokemon = pokemonRepository.save(pokemon);
-		
-		
 		
 		return mapToDto(updatedPokemon);
 	}

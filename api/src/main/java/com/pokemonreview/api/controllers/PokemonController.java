@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pokemonreview.api.dto.PokemonDto;
+import com.pokemonreview.api.dto.PokemonResponse;
 import com.pokemonreview.api.model.Pokemon;
 import com.pokemonreview.api.service.PokemonService;
 
@@ -43,12 +44,13 @@ public class PokemonController {
 		return ResponseEntity.ok(pokemons);
 	}*/
 	
-	public ResponseEntity<List<PokemonDto>> getPokemons(
+	@GetMapping("pokemon")
+	public ResponseEntity<PokemonResponse> getPokemons(
 			@RequestParam(value="pageNo" ,defaultValue="0",required = false) int pageNo,
 			@RequestParam(value="pageSize", defaultValue = "10", required = false) int pageSize
 			)
 	{
-		return new ResponseEntity<>(pokemonService.getAllPokemon(pageNo,pageSize), HttpStatus.OK);	
+		return new ResponseEntity<>(pokemonService.getAllPokemon(pageNo, pageSize),HttpStatus.OK);	
 	
 	}
 	
