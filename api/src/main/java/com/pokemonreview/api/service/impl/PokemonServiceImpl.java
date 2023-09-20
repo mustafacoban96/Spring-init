@@ -92,6 +92,7 @@ public class PokemonServiceImpl implements PokemonService{
 	public void deletePokemonId(int id) {
 		
 		Pokemon pokemon = pokemonRepository.findById(id).orElseThrow(() -> new PokemonNotFoundException("Pokemon could not be delete.."));
+		pokemonRepository.delete(pokemon);
 		
 	}
 
