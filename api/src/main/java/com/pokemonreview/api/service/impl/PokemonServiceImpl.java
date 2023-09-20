@@ -1,8 +1,13 @@
 package com.pokemonreview.api.service.impl;
 
+
+
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import com.pokemonreview.api.dto.PokemonDto;
 import com.pokemonreview.api.exceptions.PokemonNotFoundException;
@@ -41,10 +46,18 @@ public class PokemonServiceImpl implements PokemonService{
 	
 
 	@Override
-	public List<PokemonDto> getAllPokemon() {
+	public List<PokemonDto> getAllPokemon(int pageNo, int pageSize) {
+		/*
+		 * Firstly, the findAll(Pageable pageable) method. 
+		 * This method accepts a Pageable object that represents pagination information. 
+		 * This method returns a Page object meeting the pagination restriction provided in the Pageable object. 
+		 * Page is a sublist of a list of objects. 
+		 * A Page object provides information about its position in the containing list.*/
+		Pageable pageable = PageRequest.of(pageNo, pageSize);
 		// map because it returns a list
-		List<Pokemon> pokemons = pokemonRepository.findAll();
-		return pokemons.stream().map(pokemon -> mapToDto(pokemon)).collect(Collectors.toList()); 
+		Page<Pokemon> pokemons = pokemonRepository.findAll(pageable);
+		List<Pokemon> listOfPokemons = pokemons.getContent();
+		return listOfPokemons.stream().map(pokemon -> mapToDto(pokemon)).collect(Collectors.toList()); 
 	}
 	
 	

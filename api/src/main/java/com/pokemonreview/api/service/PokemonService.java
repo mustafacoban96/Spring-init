@@ -14,7 +14,7 @@ import com.pokemonreview.api.dto.PokemonDto;
 public interface PokemonService {
 
 	PokemonDto createPoekmon(PokemonDto pokemonDto);
-	List<PokemonDto> getAllPokemon();
+	List<PokemonDto> getAllPokemon(int pageNo, int pageSize);
 	PokemonDto getPokemonDto(int id);
 	PokemonDto updatePokemon(PokemonDto pokemonDto,int id);
 	void deletePokemonId(int id);
