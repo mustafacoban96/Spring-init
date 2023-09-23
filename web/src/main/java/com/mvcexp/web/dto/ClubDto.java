@@ -13,6 +13,6 @@ public class ClubDto {
 	private String title;
 	private String photoUrl;
 	private String content;
-	private LocalDateTime createOn;
-	private LocalDateTime upDateTimeOn;
+	private LocalDateTime createdOn;
+	private LocalDateTime updatedOn;
 }
