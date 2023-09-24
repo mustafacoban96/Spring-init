@@ -25,7 +25,6 @@ public class ClubServiceImpl implements ClubService{
 	@Override
 	public List<ClubDto> findAllClubs() {
 		List<Club> clubs = clubRepository.findAll();
-		
 		return clubs.stream().map((club) -> mapToClubDto(club)).collect(Collectors.toList());
 	}
 	 
@@ -40,6 +39,12 @@ public class ClubServiceImpl implements ClubService{
 				.updatedOn(club.getUpdatedOn())
 				.build();
 		return clubDto;
+	}
+
+	@Override
+	public Club saveClub(Club club) {
+		
+		return clubRepository.save(club);
 	}
 	
 	
