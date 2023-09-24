@@ -14,8 +14,8 @@ import com.mvcexp.web.service.ClubService;
 
 
 
-@RequestMapping("/web/")
-@RestController
+
+@Controller
 public class ClubController {
 	
 	private ClubService clubService;
@@ -30,7 +30,7 @@ public class ClubController {
 	public String listClubs(Model model) {
 		List<ClubDto> clubs = clubService.findAllClubs();
 		model.addAttribute("clubs", clubs);
-		return "clubs-list";
+		return "club-list";
 		
 	}
 
