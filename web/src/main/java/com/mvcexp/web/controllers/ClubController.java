@@ -51,7 +51,19 @@ public class ClubController {
 		return "redirect:/clubs";
 	}
 	
+	@GetMapping("/clubs/{clubId}/edit")
+	public String editClubForm(@PathVariable("clubId") long clubId,Model model) {
+		ClubDto clubDto = clubService.findClubById(clubId);
+		model.addAttribute("club", clubDto);
+		return "clubs-edit";
+	}
 	
+	@PostMapping("/clubs/{clubId}/edit")
+	public String updateClub(@PathVariable("clubId") long clubId, @ModelAttribute("club") ClubDto clubDto) {
+		clubDto.setId(clubId);
+		clubService.updateClub(clubDto);
+		return "redirect:/clubs";
+	}
 	
 
 }
