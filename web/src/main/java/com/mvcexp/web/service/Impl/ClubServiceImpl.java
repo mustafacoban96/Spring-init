@@ -1,11 +1,8 @@
 package com.mvcexp.web.service.Impl;
-
 import java.util.List;
 import java.util.stream.Collectors;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.mvcexp.web.dto.ClubDto;
 import com.mvcexp.web.models.Club;
 import com.mvcexp.web.repository.ClubRepository;
@@ -73,6 +70,12 @@ public class ClubServiceImpl implements ClubService{
 	public void delete(Long clubId) {
 		clubRepository.deleteById(clubId);
 		
+	}
+
+	@Override
+	public List<ClubDto> searchClubs(String query) {
+		List<Club> clubs = clubRepository.searchClubs(query);
+		return clubs.stream().map(club -> mapToClubDto(club)).collect(Collectors.toList());
 	}
 
 }

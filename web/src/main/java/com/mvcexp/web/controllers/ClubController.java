@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import com.mvcexp.web.dto.ClubDto;
 import com.mvcexp.web.models.Club;
 import com.mvcexp.web.service.ClubService;
@@ -91,5 +94,11 @@ public class ClubController {
 		return "redirect:/clubs";
 	}
 	
+	@GetMapping("/clubs/search")
+	public String searchClub(@RequestParam(value="query") String query,Model model) {
+		List<ClubDto> clubs = clubService.searchClubs(query);
+		model.addAttribute("clubs", clubs);
+		return "club-list";
+	}
 
 }
