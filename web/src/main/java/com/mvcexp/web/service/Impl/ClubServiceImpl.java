@@ -60,7 +60,6 @@ public class ClubServiceImpl implements ClubService{
 	
 	private Club mapToEntity(ClubDto clubDto) {
 		Club club = Club.builder()
-				.id(clubDto.getId())
 				.title(clubDto.getTitle())
 				.photoUrl(clubDto.getPhotoUrl())
 				.content(clubDto.getContent())
