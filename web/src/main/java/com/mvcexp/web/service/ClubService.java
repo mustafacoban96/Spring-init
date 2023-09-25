@@ -8,7 +8,7 @@ import com.mvcexp.web.models.Club;
 public interface ClubService {
 	
 	List<ClubDto> findAllClubs();
-	Club saveClub(Club club);
+	Club saveClub(ClubDto clubDto);
 	ClubDto findClubById(long clubId);
 	void updateClub(ClubDto clubDto);
 

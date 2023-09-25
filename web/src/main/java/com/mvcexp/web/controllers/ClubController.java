@@ -5,16 +5,17 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 import com.mvcexp.web.dto.ClubDto;
 import com.mvcexp.web.models.Club;
 import com.mvcexp.web.service.ClubService;
+import jakarta.validation.Valid;
+
+
 
 
 
@@ -46,8 +47,12 @@ public class ClubController {
 	}
 	
 	@PostMapping("/clubs/new")
-	public String saveClub(@ModelAttribute("club") Club club) {
-		clubService.saveClub(club);
+	public String saveClub(@Valid @ModelAttribute("club") ClubDto clubDto, BindingResult result,Model model) {
+		if(result.hasErrors()) {
+			model.addAttribute("club",clubDto);
+			return "clubs-create";
+		}
+		clubService.saveClub(clubDto);
 		return "redirect:/clubs";
 	}
 	
@@ -59,7 +64,14 @@ public class ClubController {
 	}
 	
 	@PostMapping("/clubs/{clubId}/edit")
-	public String updateClub(@PathVariable("clubId") long clubId, @ModelAttribute("club") ClubDto clubDto) {
+	public String updateClub(@PathVariable("clubId") long clubId,
+			@Valid @ModelAttribute("club") ClubDto clubDto,
+			BindingResult result
+			) {
+		
+		if(result.hasErrors()) {
+			return "clubs-edit";
+		}
 		clubDto.setId(clubId);
 		clubService.updateClub(clubDto);
 		return "redirect:/clubs";

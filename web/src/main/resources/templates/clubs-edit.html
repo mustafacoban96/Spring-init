@@ -6,7 +6,6 @@ layout:decorate="~{layout}">
 </head>
 <body>
 	  <main class="flex-shrink-0">
-           
             <!-- Page Content-->
             <section layout:fragment="body" class="py-5">
 	            <div class="container w-50 mt-5">
@@ -16,21 +15,27 @@ layout:decorate="~{layout}">
 					  <div class="row mb-4">
 					    <div class="col">
 					      <div class="form-outline">
+					      	<label class="form-label" for="title">Title</label>
+					      	<p th:if="${#fields.hasErrors('title')}" class="text-danger" th:errors="*{title}"></p>
 					        <input type="text" id="title" class="form-control" name="title" th:field="*{title}"/>
-					        <label class="form-label" for="title">Title</label>
+					        
 					      </div>
 					    </div>
 					    <div class="col">
 					      <div class="form-outline">
+					      	<p th:if="${#fields.hasErrors('photoUrl')}" class="text-danger" th:errors="*{photoUrl}"></p>
+					       	<label class="form-label" for="photoUrl">Photo Url</label>
 					        <input type="text" id="photoUrl" class="form-control" name="photoUrl" th:field="*{photoUrl}"/>
-					        <label class="form-label" for="photoUrl">Photo Url</label>
+					       
 					      </div>
 					    </div>
 					  </div>
 								  <!-- Text input -->
 					  <div class="form-outline mb-4">
+					  	<label class="form-label" for="content">Content</label>
+					  	<p th:if="${#fields.hasErrors('content')}" class="text-danger" th:errors="*{content}"></p>
 					    <input type="text" id="content" class="form-control" name="content" th:field="*{content}"/>
-					    <label class="form-label" for="content">Content</label>
+					    
 					  </div>
 					
 					  <!-- Submit button -->
