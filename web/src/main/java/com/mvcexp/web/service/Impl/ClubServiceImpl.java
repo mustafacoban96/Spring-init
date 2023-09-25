@@ -51,7 +51,7 @@ public class ClubServiceImpl implements ClubService{
 				.id(club.getId())
 				.title(club.getTitle())
 				.photoUrl(club.getPhotoUrl())
-				.content(club.getContent())
+				.content(club.getContent()) 
 				.createdOn(club.getCreatedOn())
 				.updatedOn(club.getUpdatedOn())
 				.build();
@@ -67,6 +67,12 @@ public class ClubServiceImpl implements ClubService{
 				.updatedOn(clubDto.getUpdatedOn())
 				.build();
 		return club;
+	}
+
+	@Override
+	public void delete(Long clubId) {
+		clubRepository.deleteById(clubId);
+		
 	}
 
 }
