@@ -1,0 +1,65 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+layout:decorate="~{layout}">
+<head>
+<meta charset="UTF-8">
+<title>Event Create</title>
+</head>
+<body>
+	  <main class="flex-shrink-0">
+           
+            <!-- Page Content-->
+            <section layout:fragment="body" class="py-5">
+	            <div class="container w-50 mt-5">
+	            		<form role="form" method="post" th:action="@{/events/{clubId}(clubId=${clubId})}" th:object="${event}">
+					  <!-- 2 column grid layout with text inputs for the first and last names -->
+					  <div class="row mb-4">
+					    <div class="col">
+					      <div class="form-outline">
+					      	<label class="form-label" for="name">Name</label>
+					      	<p th:if="${#fields.hasErrors('name')}" class="text-danger" th:errors="*{name}"></p>
+					        <input type="text" id="name" class="form-control" name="title" th:field="*{name}"/>
+					        
+					      </div>
+					    </div>
+					    <div class="col">
+					      <div class="form-outline">
+					       	<label class="form-label" for="type">Type</label>
+					       	<p th:if="${#fields.hasErrors('type')}" class="text-danger" th:errors="*{type}"></p>
+					        <input type="text" id="type" class="form-control" name="photoUrl" th:field="*{type}"/>
+					      </div>
+					    </div>
+					  </div>
+								  <!-- Text input -->
+					  <div class="form-outline mb-4">
+					    <label class="form-label" for="photoUrl">Photo Url</label>
+					  	<p th:if="${#fields.hasErrors('photoUrl')}" class="text-danger" th:errors="*{photoUrl}"></p>
+					    <input type="text" id="photoUrl" class="form-control" name="photoUrl" th:field="*{photoUrl}"/>
+					  </div>
+					  <div class="row mb-4">
+					    <div class="col">
+					      <div class="form-outline">
+					      	<label class="form-label" for="startTime">Start Time</label>
+					      	<p th:if="${#fields.hasErrors('startTime')}" class="text-danger" th:errors="*{startTime}"></p>
+					        <input type="datetime-local" id="startTime" class="form-control" name="startTime" th:field="*{startTime}"/>
+					        
+					      </div>
+					    </div>
+					    <div class="col">
+					      <div class="form-outline">
+					       	<label class="form-label" for="endDateTime">End Time</label>
+					       	<p th:if="${#fields.hasErrors('endDateTime')}" class="text-danger" th:errors="*{endDateTime}"></p>
+					        <input type="datetime-local" id="endDateTime" class="form-control" name="endDateTime" th:field="*{endDateTime}"/>
+					      </div>
+					    </div>
+					  </div>
+					
+					  <!-- Submit button -->
+					  <button type="submit" class="btn btn-primary btn-block mb-4">Create</button>
+				</form>
+	            </div>
+               	
+            </section>
+           
+        </main>
+</body>
+</html>

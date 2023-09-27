@@ -33,7 +33,7 @@ public class Event {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
-	private LocalDateTime starTime;
+	private LocalDateTime startTime;
 	private LocalDateTime endDateTime;
 	private String type;
 	private String photoUrl;

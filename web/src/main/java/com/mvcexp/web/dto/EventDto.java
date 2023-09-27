@@ -2,8 +2,7 @@ package com.mvcexp.web.dto;
 
 import java.time.LocalDateTime;
 
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,9 +17,12 @@ public class EventDto {
 	
 	private Long id;
 	private String name;
-	private LocalDateTime starTime;
+	@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+	private LocalDateTime startTime;
+	@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
 	private LocalDateTime endDateTime;
 	private String type;
+	private String photoUrl;
 	private LocalDateTime createOn;
 	private LocalDateTime updatedOn;
 
