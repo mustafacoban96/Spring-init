@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.mvcexp.web.models.Club;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -25,5 +27,5 @@ public class EventDto {
 	private String photoUrl;
 	private LocalDateTime createOn;
 	private LocalDateTime updatedOn;
-
+	private Club club;
 }

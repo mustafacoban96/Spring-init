@@ -16,6 +16,7 @@ public class EventMapper {
 				.type(eventDto.getType())
 				.createOn(eventDto.getCreateOn())
 				.updatedOn(eventDto.getUpdatedOn())
+				.club(eventDto.getClub())
 				.build();
 	}
 	
@@ -29,6 +30,7 @@ public class EventMapper {
 				.type(event.getType())
 				.createOn(event.getCreateOn())
 				.updatedOn(event.getUpdatedOn())
+				.club(event.getClub())
 				.build();
 	}
 	

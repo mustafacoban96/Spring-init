@@ -19,7 +19,7 @@ layout:decorate="~{layout}">
                             </div>
                            
                             <a th:href="@{/events/{eventId}(eventId=${event.id})}" class="btn btn-primary">View</a>
-                             <a class="btn btn-primary">Edit</a>
+                             <a th:href="@{/events/{eventId}/edit(eventId=${event.id})}" class="btn btn-primary">Edit</a>
                         </div>
                     </div>
                 </div>

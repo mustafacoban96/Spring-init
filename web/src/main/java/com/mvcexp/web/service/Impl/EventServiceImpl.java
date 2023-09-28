@@ -17,6 +17,8 @@ import com.mvcexp.web.repository.ClubRepository;
 import com.mvcexp.web.repository.EventRepository;
 import com.mvcexp.web.service.EventService;
 
+import jakarta.validation.Valid;
+
 
 @Service
 public class EventServiceImpl implements EventService{
@@ -49,6 +51,13 @@ public class EventServiceImpl implements EventService{
 	public EventDto findByEventId(Long eventId) {
 		Event event = eventRepository.findById(eventId).get();
 		return EventMapper.mapToEventDto(event);
+	}
+
+	@Override
+	public void updateEvent(EventDto eventDto) {
+		Event event = EventMapper.mapToEvent(eventDto);
+		eventRepository.save(event);
+		
 	}
 	
 	
