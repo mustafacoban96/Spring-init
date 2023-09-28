@@ -1,5 +1,7 @@
 package com.mvcexp.web.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,6 +37,13 @@ public class EventController {
 	public String createEvent(@PathVariable("clubId") Long clubId, @ModelAttribute("event") EventDto eventDto, Model model) {
 		eventService.createEvent(clubId, eventDto);
 		return "redirect:/clubs/" + clubId;
+	}
+	
+	@GetMapping("/events")
+	public String eventList(Model model) {
+		List<EventDto> events = eventService.findAllEvents();
+		model.addAttribute("events", events);
+		return "events-list";
 	}
 
 }

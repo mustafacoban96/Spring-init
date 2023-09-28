@@ -2,11 +2,15 @@ package com.mvcexp.web.service.Impl;
 
 
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.core.sym.Name;
 import com.mvcexp.web.dto.EventDto;
+import com.mvcexp.web.mapper.EventMapper;
 import com.mvcexp.web.models.Club;
 import com.mvcexp.web.models.Event;
 import com.mvcexp.web.repository.ClubRepository;
@@ -30,23 +34,24 @@ public class EventServiceImpl implements EventService{
 	@Override
 	public void createEvent(Long clubId, EventDto eventDto) {
 		Club club = clubRepository.findById(clubId).get();
-		Event event = mapToEvent(eventDto);
+		Event event = EventMapper.mapToEvent(eventDto);
 		event.setClub(club);
 		eventRepository.save(event);
 	}
-	
-	
-	private Event mapToEvent(EventDto eventDto) {
-		return Event.builder()
-				.id(eventDto.getId())
-				.name(eventDto.getName())
-				.startTime(eventDto.getStartTime())
-				.photoUrl(eventDto.getPhotoUrl())
-				.endDateTime(eventDto.getEndDateTime())
-				.type(eventDto.getType())
-				.createOn(eventDto.getCreateOn())
-				.updatedOn(eventDto.getUpdatedOn())
-				.build();
+
+	@Override
+	public List<EventDto> findAllEvents() {
+		List<Event> events = eventRepository.findAll(); 
+		return events.stream().map((event) -> EventMapper.mapToEventDto(event)).collect(Collectors.toList());
 	}
+
+	@Override
+	public EventDto findByEventId(Long eventId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	
+	
 	
 }
