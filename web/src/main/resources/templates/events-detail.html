@@ -31,8 +31,7 @@ layout:decorate="~{layout}">
                             <div class="small text-muted" th:text="${event.createOn}"></div>
                             <h2 class="card-title">About this running event</h2>
                             <p class="card-text" th:text="${event.type}"></p>
-                            <a class="btn btn-primary">Delete</a>
-                             <a class="btn btn-primary">Edit Event</a>
+                            <a class="btn btn-primary" th:href="@{/events/{eventId}/delete(eventId=${event.id})}">Delete</a>
                         </div>
                     </div>
                 <!-- Side widgets-->
