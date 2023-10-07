@@ -14,7 +14,7 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name="roles")
-public class Roles {
+public class Role {
 
 	
 	@Id
