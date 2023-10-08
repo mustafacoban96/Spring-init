@@ -9,6 +9,8 @@ import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.SessionManagementConfigurer;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -23,17 +25,23 @@ public class SecurityConfig {
 	
 	
 	private CustomUserDetailsService userDetailsService;
-	
+	private JwtAuthEntryPoint authEntryPoint;
 	
 	@Autowired  // we inject CustomerDetailsService -> SecurityConfig
-	public SecurityConfig(CustomUserDetailsService userDetailsService) {
+	public SecurityConfig(CustomUserDetailsService userDetailsService, JwtAuthEntryPoint authEntryPoint) {
 		this.userDetailsService = userDetailsService;
+		this.authEntryPoint = authEntryPoint;
 	}
 
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
 		http
 			.csrf(csrf -> csrf.disable())
+			.exceptionHandling((exceptionHandling) -> exceptionHandling
+					.authenticationEntryPoint(authEntryPoint)
+			)
+			.sessionManagement(sessionManagement -> 
+			sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 			.authorizeHttpRequests(auth -> auth
 					.requestMatchers("/api/auth/**")
 					.permitAll()
@@ -43,7 +51,7 @@ public class SecurityConfig {
 		return http.build();
 	}
 	
-	@Bean
+	/*@Bean
 	public UserDetailsService users() {
 		UserDetails admin = User.builder()
 				.username("admin")
@@ -57,7 +65,7 @@ public class SecurityConfig {
 				.build();
 		
 		return new InMemoryUserDetailsManager(admin,user);
-	}
+	}*/
 	@Bean
 	public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception{
 		return authenticationConfiguration.getAuthenticationManager();
