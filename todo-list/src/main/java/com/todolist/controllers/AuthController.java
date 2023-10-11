@@ -35,7 +35,7 @@ public class AuthController {
 	
 	
 	public AuthController(AuthenticationManager authenticationManager, UserRepository userRepository,
-			RoleRepository roleRepository,JWTGenerator jwtGeneratoriGenerator,PasswordEncoder passwordEncoder ) {
+			RoleRepository roleRepository,JWTGenerator jwtGenerator,PasswordEncoder passwordEncoder ) {
 		this.authenticationManager = authenticationManager;
 		this.userRepository = userRepository;
 		this.roleRepository = roleRepository;
