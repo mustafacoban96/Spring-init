@@ -1,11 +1,8 @@
 package com.todolist.service;
 
-import java.util.List;
-
-import com.todolist.dto.UserDto;
+import com.todolist.dto.RegisterDto;
 
 public interface UserService {
-
-	List<UserDto> getAllUsers();
+	
 	
 }
