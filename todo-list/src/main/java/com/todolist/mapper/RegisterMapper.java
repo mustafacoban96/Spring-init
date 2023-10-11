@@ -14,10 +14,13 @@ import lombok.Getter;
 @Component
 public class RegisterMapper {
 	
-	@Autowired
+	
 	private static PasswordEncoder passwordEncoder;
 	
-	
+	@Autowired
+	public RegisterMapper(PasswordEncoder passwordEncoder) {
+		this.passwordEncoder = passwordEncoder;
+	}
 	
 	public static UserEntity mapToRegisterEntity(RegisterDto registerDto) {
 		UserEntity user = UserEntity.builder()
