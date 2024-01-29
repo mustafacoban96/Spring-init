@@ -1,5 +1,7 @@
 package com.shepherd.securitypractice.basicauth.service;
 
+import java.util.Optional;
+
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -33,12 +35,18 @@ public class UserService {
 		this.passwordEncoder = passwordEncoder;
 	}
 	
+	
+	
+	public Optional<User> getByUsername(String username){
+		return userRepository.findByUsername(username);
+	}
+	
 	public User createUser(CreateUserRequest request) {
 		
 		User newUser = User.builder()
 				.name(request.name())
 				.username(request.username())
-				.password(request.password())
+				.password(passwordEncoder.encode(request.password()))
 				.accountNonExpired(true)
 				.credentialsNonExpired(true)
 				.isEnabled(true)
