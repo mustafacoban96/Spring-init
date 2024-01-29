@@ -10,6 +10,8 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
 import org.springframework.security.web.SecurityFilterChain;
 
+import com.shepherd.securitypractice.basicauth.models.Role;
+
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
@@ -24,7 +26,7 @@ public class SecurityConfig {
 		.csrf(csrf -> csrf.disable())
 		.authorizeHttpRequests(x -> 
 						x.requestMatchers("/public/**").permitAll()
-						.requestMatchers("/private/**").authenticated()
+						.requestMatchers("/private/**").hasAnyRole(Role.ROLE_USER.name(),Role.ROLE_ADMIN.name(),Role.ROLE_FSK.name())
 					
 		)
 		.formLogin(AbstractHttpConfigurer::disable)

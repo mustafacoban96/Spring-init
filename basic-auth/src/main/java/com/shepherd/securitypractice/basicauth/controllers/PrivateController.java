@@ -8,21 +8,26 @@ import org.springframework.web.bind.annotation.RestController;
 public class PrivateController {
 
 	
-
-	@GetMapping("admin")
+	
+	@GetMapping
+	public String privatePage() {
+		return "Hello i am private page";
+	}
+	
+	@GetMapping("/admin")
 	public String privateAdmin() {
 		return "Hello i am private admin";
 	}
 	
 	
 	
-	@GetMapping("user")
+	@GetMapping("/user")
 	public String privateUser() {
 		return "Hello i am private user";
 	}
 	
 	
-	@GetMapping("fsk")
+	@GetMapping("/fsk")
 	public String privateFsk() {
 		return "hello i am private FSK";
 	}
