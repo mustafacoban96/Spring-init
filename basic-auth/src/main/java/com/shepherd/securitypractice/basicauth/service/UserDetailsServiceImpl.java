@@ -23,8 +23,8 @@ public class UserDetailsServiceImpl implements UserDetailsService{
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		Optional<User> user = userService.getByUsername(username);
-		return user.orElseThrow(() -> new EntityNotFoundException());
-		//return user.orElseThrow(ntityNotFoundException::new);
+		//return user.orElseThrow(() -> new EntityNotFoundException());
+		return user.orElseThrow(EntityNotFoundException::new);
 	}
 	
 	
