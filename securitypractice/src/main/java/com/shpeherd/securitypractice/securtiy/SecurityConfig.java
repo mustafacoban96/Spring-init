@@ -52,8 +52,8 @@ public class SecurityConfig {
 			.authorizeHttpRequests(x -> 
 				x.requestMatchers("/public/**","auth/**").permitAll()
 			)
-			//.authorizeHttpRequests(x -> x.requestMatchers("/private/admin/**").hasRole("ADMIN"))
-			//.authorizeHttpRequests(x -> x.requestMatchers("/private/user/**").hasRole("USER"))
+			.authorizeHttpRequests(x -> x.requestMatchers("/private/admin/**").hasRole("ADMIN"))
+			.authorizeHttpRequests(x -> x.requestMatchers("/private/user/**").hasRole("USER"))
 			.authorizeHttpRequests(x -> x.anyRequest().authenticated())
 			.httpBasic(Customizer.withDefaults());
 		return http.build();
