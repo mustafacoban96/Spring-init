@@ -28,19 +28,25 @@ public class SecurityConfig {
 		
 		http
 		.headers(x -> x.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable))
-		.csrf(csrf -> csrf.ignoringRequestMatchers(mvcRequestBuilder.pattern("/public/**"))
-				.ignoringRequestMatchers(PathRequest.toH2Console())
-				)
+		.csrf(csrfConfig ->
+        csrfConfig.ignoringRequestMatchers(mvcRequestBuilder.pattern("/public/**"))
+        .ignoringRequestMatchers(PathRequest.toH2Console()))
 		.authorizeHttpRequests(x -> 
-						x.requestMatchers(mvcRequestBuilder.pattern("/public/**")).permitAll()
-						.requestMatchers(mvcRequestBuilder.pattern("/private/**")).hasAnyRole(Role.ROLE_USER.name(),Role.ROLE_ADMIN.name(),Role.ROLE_FSK.name())
-						.requestMatchers(PathRequest.toH2Console()).hasAnyRole("ADMIN")
-						.anyRequest().authenticated()
+						x
+						 .requestMatchers(mvcRequestBuilder.pattern("/public/**")).permitAll()
+                         .requestMatchers(mvcRequestBuilder.pattern("/private/admin/**")).hasRole(Role.ROLE_ADMIN.getValue())
+                         .requestMatchers(mvcRequestBuilder.pattern("/private/**")).hasAnyRole(Role.ROLE_USER.getValue(),
+                                 Role.ROLE_ADMIN.getValue(),
+                                 Role.ROLE_FSK.getValue())
+                         .requestMatchers(PathRequest.toH2Console()).hasRole("ADMIN")
+                         .anyRequest().authenticated()
 		)
+		
 		.formLogin(AbstractHttpConfigurer::disable)
 		//.authorizeHttpRequests(x -> x.requestMatchers("/private/**").authenticated())
 		//.authorizeHttpRequests(x -> x.anyRequest().authenticated())
 		.httpBasic(Customizer.withDefaults());
+		System.out.println(Role.ROLE_ADMIN.name());
 		return http.build();
 	}
 	

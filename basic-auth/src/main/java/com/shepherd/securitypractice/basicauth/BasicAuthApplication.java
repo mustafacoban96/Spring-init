@@ -45,7 +45,7 @@ public class BasicAuthApplication implements CommandLineRunner{
 				.password("pass")
 				.authorities(Set.of(Role.ROLE_ADMIN))
 				.build();
-		userService.createUser(request2);
+		userService.createUser(request2);  
 		
 		CreateUserRequest request3 = CreateUserRequest.builder()
 				.name("FSK")

@@ -9,27 +9,20 @@ public class PrivateController {
 
 	
 	
-	@GetMapping
-	public String privatePage() {
-		return "Hello i am private page";
-	}
-	
-	@GetMapping("/admin")
-	public String privateAdmin() {
-		return "Hello i am private admin";
-	}
-	
-	
-	
-	@GetMapping("/user")
-	public String privateUser() {
-		return "Hello i am private user";
-	}
-	
-	
-	@GetMapping("/fsk")
-	public String privateFsk() {
-		return "hello i am private FSK";
-	}
+
+    @GetMapping
+    public String helloWorldPrivate() {
+        return "Hello World! from private endpoint";
+    }
+
+    @GetMapping("/user")
+    public String helloWorldUserPrivate() {
+        return "Hello World! from user private endpoint";
+    }
+
+    @GetMapping("/admin")
+    public String helloWorldAdminPrivate() {
+        return "Hello World! from user private endpoint";
+    }
 	
 }

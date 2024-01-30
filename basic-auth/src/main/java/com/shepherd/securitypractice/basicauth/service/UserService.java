@@ -47,6 +47,7 @@ public class UserService {
 				.name(request.name())
 				.username(request.username())
 				.password(passwordEncoder.encode(request.password()))
+				.authorities(request.authorities())
 				.accountNonExpired(true)
 				.credentialsNonExpired(true)
 				.isEnabled(true)
