@@ -22,7 +22,7 @@ public class PrivateController {
 
     @GetMapping("/admin")
     public String helloWorldAdminPrivate() {
-        return "Hello World! from user private endpoint";
+        return "Hello World! from admin private endpoint";
     }
 	
 }

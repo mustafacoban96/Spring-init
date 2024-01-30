@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.servlet.util.matcher.MvcRequestMatcher;
 import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
@@ -42,11 +43,14 @@ public class SecurityConfig {
                          .anyRequest().authenticated()
 		)
 		
-		.formLogin(AbstractHttpConfigurer::disable)
+		.formLogin(Customizer.withDefaults())
+		//formLogin create/product login-logout pages.
 		//.authorizeHttpRequests(x -> x.requestMatchers("/private/**").authenticated())
 		//.authorizeHttpRequests(x -> x.anyRequest().authenticated())
-		.httpBasic(Customizer.withDefaults());
-		System.out.println(Role.ROLE_ADMIN.name());
+		.httpBasic(Customizer.withDefaults())
+		.sessionManagement(x -> 
+		x.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED));
+		
 		return http.build();
 	}
 	
