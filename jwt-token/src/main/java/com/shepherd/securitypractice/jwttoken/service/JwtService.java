@@ -68,7 +68,7 @@ public class JwtService {
 		return claims.getExpiration();
 	}
 	
-	private String extractUsername(String token) {
+	public String extractUsername(String token) {
 		Claims claims = Jwts
 				.parserBuilder()
 				.setSigningKey(getSignKey())
