@@ -24,7 +24,7 @@ public class JwtService {
 	
 	public String generateToken(String userName) {
 		Map<String, Object> claims = new HashMap<>();
-		claims.put("can", "wia");
+		
 		return createToken(claims, userName);
 		
 		
@@ -63,7 +63,7 @@ public class JwtService {
 				.parserBuilder()
 				.setSigningKey(getSignKey())
 				.build()
-				.parseClaimsJwt(token)
+				.parseClaimsJws(token)
 				.getBody();
 		return claims.getExpiration();
 	}
@@ -73,7 +73,7 @@ public class JwtService {
 				.parserBuilder()
 				.setSigningKey(getSignKey())
 				.build()
-				.parseClaimsJwt(token)
+				.parseClaimsJws(token)
 				.getBody();
 		return claims.getSubject();
 	}

@@ -15,6 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import com.shepherd.securitypractice.jwttoken.models.Role;
 import com.shepherd.securitypractice.jwttoken.service.UserService;
 
 @Configuration
@@ -40,9 +41,9 @@ public class SecurityConfig {
 				.csrf(AbstractHttpConfigurer::disable)
 				.authorizeHttpRequests( x ->
 								x
-								.requestMatchers("/auth/addNewUser/**","/auth/generateToken/**").permitAll()
-								.requestMatchers("/auth/user/**").hasRole("USER")
-								.requestMatchers("/auth/admin/**").hasRole("ADMIN")
+								.requestMatchers("/auth/welcome/**","/auth/addNewUser/**","/auth/generateToken/**").permitAll()
+								.requestMatchers("/auth/user/**").hasRole(Role.ROLE_USER.getValue())
+								.requestMatchers("/auth/admin/**").hasRole(Role.ROLE_ADMIN.getValue())
 								
 						)
 				.sessionManagement(x -> x.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
@@ -52,14 +53,18 @@ public class SecurityConfig {
 		
 	}
 	
+	
+	// auth yaparken hangi password encoder ve user service kullanılacağını belirler.
 	@Bean
 	public AuthenticationProvider authenticationProvider() {
 		DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
 		authenticationProvider.setUserDetailsService(userService);
 		authenticationProvider.setPasswordEncoder(passwordEncoder);
-		return authenticationProvider();
+		return authenticationProvider;
 	}
 	
+	
+	// auth işlemini yapacak
 	@Bean
 	public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
 		return authenticationConfiguration.getAuthenticationManager();
