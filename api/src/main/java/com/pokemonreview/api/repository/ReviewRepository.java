@@ -9,6 +9,7 @@ import com.pokemonreview.api.model.Review;
 public interface ReviewRepository extends JpaRepository<Review, Integer>{
 	
 	List<Review> findByPokemonId(int pokemonId);
+
 	
 	
 

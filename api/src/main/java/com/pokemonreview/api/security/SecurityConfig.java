@@ -39,7 +39,7 @@ public class SecurityConfig {
 		http
 			.csrf(csrf -> csrf.disable())
 			.exceptionHandling((exceptionHandling) -> exceptionHandling
-					.authenticationEntryPoint(authEntryPoint)
+					.authenticationEntryPoint(authEntryPoint) 
 			)
 			.sessionManagement(sessionManagement -> 
 			sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

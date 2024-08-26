@@ -35,11 +35,11 @@ public class PokemonServiceImpl implements PokemonService{
 		pokemon.setType(pokemonDto.getType());
 		
 		Pokemon newPokemon = pokemonRepository.save(pokemon);
-		PokemonDto pokemonResponse = new PokemonDto();
-		
-		pokemonResponse.setId(newPokemon.getId());
-		pokemonResponse.setName(newPokemon.getName());
-		pokemonResponse.setType(newPokemon.getType());
+		PokemonDto pokemonResponse = PokemonDto.builder()
+				.id(newPokemon.getId())
+				.name(newPokemon.getName())
+				.type(newPokemon.getType()).
+				build();
 		
 		return pokemonResponse;
 	}
@@ -60,13 +60,15 @@ public class PokemonServiceImpl implements PokemonService{
 		List<Pokemon> listOfPokemons = pokemons.getContent();
 		List<PokemonDto> content = listOfPokemons.stream().map(pokemon -> mapToDto(pokemon)).collect(Collectors.toList()); 
 		
-		PokemonResponse pokemonResponse = new PokemonResponse();
-		pokemonResponse.setContent(content);
-		pokemonResponse.setPageNo(pokemons.getNumber());
-		pokemonResponse.setPageSize(pokemons.getSize());
-		pokemonResponse.setTotalElements(pokemons.getTotalElements());
-		pokemonResponse.setTotalPages(pokemonResponse.getTotalPages());
-		pokemonResponse.setLast(pokemons.isLast());
+		PokemonResponse pokemonResponse = PokemonResponse.builder()
+				.content(content)
+				.pageNo(pokemons.getNumber())
+				.pageSize(pokemons.getSize())
+				.totalPages(pokemons.getTotalPages())
+				.totalElements(pokemons.getTotalElements())
+				.last(pokemons.isLast())
+				.build();
+
 		
 		return pokemonResponse;
 	}
@@ -74,11 +76,11 @@ public class PokemonServiceImpl implements PokemonService{
 	
 	private PokemonDto mapToDto(Pokemon pokemon) {
 		
-		PokemonDto pokemonDto = new PokemonDto();
-		pokemonDto.setId(pokemon.getId());
-		pokemonDto.setName(pokemon.getName());
-		pokemonDto.setType(pokemon.getType());
-		
+		PokemonDto pokemonDto = PokemonDto.builder()
+				.id(pokemon.getId())
+				.name(pokemon.getName())
+				.type(pokemon.getType())
+				.build();
 		return pokemonDto;
 		
 	}

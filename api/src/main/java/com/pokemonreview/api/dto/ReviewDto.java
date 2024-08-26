@@ -2,10 +2,12 @@ package com.pokemonreview.api.dto;
 
 import com.pokemonreview.api.model.Pokemon;
 
+import lombok.Builder;
 import lombok.Data;
 
 
 @Data
+@Builder
 public class ReviewDto {
 	
 	private int id;

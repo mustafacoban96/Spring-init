@@ -54,14 +54,14 @@ public class ReviewServiceImpl implements ReviewService{
 	
 	
 	private ReviewDto mapToDto(Review review) {
-		
-		ReviewDto reviewDto = new ReviewDto();
-		reviewDto.setId(review.getId());
-		reviewDto.setTitle(review.getTitle());
-		reviewDto.setStars(review.getStars());
-		reviewDto.setContent(review.getContent());
-		
-		
+		ReviewDto reviewDto = ReviewDto.builder()
+				.id(review.getId())
+				.title(review.getTitle())
+				.stars(review.getStars())
+				.content(review.getContent())
+				.pokemon(review.getPokemon())
+				.build();
+
 		return reviewDto;
 		
 	}
